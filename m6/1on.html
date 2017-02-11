@@ -1,0 +1,55 @@
+<html>
+<head>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.js"></script>
+	
+</head>
+<body>
+
+<script type="text/javascript" >
+
+function handler1(e) {
+	console.log('clicked 1');
+	if($("#stopDefault").attr("checked"))
+		e.preventDefault();
+	if($("#stopPropagation").attr("checked"))
+		e.stopPropagation();
+	/* Runs only top click any stops bubbling or propagation */
+	if($("#stopPropagationImmediate").attr("checked"))
+		e.stopImmediatePropagation();
+		/* Runs only one handler. Stops next handlers */
+}
+
+function handler2() {
+	console.log('clicked 2');
+}
+	
+$(function() {
+
+	/*  Replaces bind, delegate, live
+		Use off() to remove
+		Supports namespacing of events
+		Has multiple event registration shortcuts
+		Supports stopping bubbling & propagation
+		Can use shortcut for returning false
+		Replaces live() for future element events */
+
+	$("#myLink").on("click", handler1);
+	$("#myLink").on("click", handler2);
+	$("#container").on("click", function(e) { console.log('clicked the div'); });
+
+	/* Replacing live with on to take care of dynamically added content. To do this use on with parent
+		$("tr.datarow").live("click", myHandler);
+		$("#parent").on("click", "tr.datarow", myHandler);
+	*/
+});
+	
+</script>
+	<h1>Propagation & Bubbling Example</h1>
+	<div id="container" style="height:100px; width: 200px; border: 1px solid black">
+		<a id="myLink" href="http://www.pluralsight-training.net">Pluralsight</a>
+	</div>
+	<input id="stopDefault" type="checkbox"/> Prevent Default<br/>
+	<input id="stopPropagation" type="checkbox"/> Stop Propagation<br/>
+	<input id="stopPropagationImmediate" type="checkbox"/> Stop Immediate Propagation<br/>
+</body>
+</html>
