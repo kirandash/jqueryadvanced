@@ -1,0 +1,26 @@
+<html>
+<head>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.js"></script>
+	
+</head>
+<body>
+
+<script type="text/javascript" >
+
+	
+$(function() {
+
+	console.log($("#div1").data("myValue"));
+	$("#div1").data("myValue", "4");
+	/* Read from cache first */
+	console.log($("#div1").data("myValue"));
+	/* HTML Unchanged */
+	console.log($("#div1").get(0));
+	
+});
+	
+</script>
+	<div id="div1" data-my-value="3" ></div>
+	
+</body>
+</html>
